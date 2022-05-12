@@ -53,6 +53,21 @@
                 android:orientation="vertical"
                 android:layout_marginTop="20dp">
 
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/profilePic"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Upload"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btn_upload"/>
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
