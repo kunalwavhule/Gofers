@@ -6,190 +6,222 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="194dp"
-        android:layout_height="130dp"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/groffer" />
-
-    <TextView
-
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imageView3"
-        android:fontFamily="@font/amaranth_bold"
-        android:id="@+id/create"
+        android:layout_height="match_parent">
 
-        android:text="CREATE GROFERS CAB ACCOUNT"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="25dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/create"
-        android:id="@+id/signuptext"
-        android:textAlignment="center"
-        android:text="Sign Up To Get Your Grofer Driver Account"
-        android:layout_marginTop="10dp"
-        android:textSize="18dp"
-        android:textStyle="bold"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signuptext">
-
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/titletxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/baloo_bhai"
+                android:text="SIGN UP"
+                android:textColor="#474747"
+                android:textSize="55dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/creategofer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/amaranth_bold"
+                android:text="Create Gofers Cab Account :"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/acme"
+                android:text="Fill Your All Details Corectly Below :"
+                android:textSize="18dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="20dp">
 
-                <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/profilePic"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profilePic"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_baseline_account_circle_24"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.17"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_select_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="Select Image"
+                    android:backgroundTint="#474747"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.88"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Upload"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/btn_upload"/>
+                    android:text="Upload Image"
+                    android:id="@+id/btnUpload"
+                    android:backgroundTint="#474747"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.893"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:hint="First Name.."
-                    android:id="@+id/firstName"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="10dp"
-                    android:background="@drawable/edittext_background"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:hint="Last Name.."
-                    android:id="@+id/lastName"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="10dp"
-                    android:background="@drawable/edittext_background"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/firstName"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_background"
+                android:fontFamily="@font/acme"
+                android:hint="First Name"
+                android:padding="10dp"
+                android:textColorHint="#3C3C3C" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:id="@+id/adharNo"
-                    android:hint="Adhar Card no..."
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/lastName"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_background"
+                android:fontFamily="@font/acme"
+                android:hint="Last Name"
+                android:padding="10dp"
+                android:textColorHint="#3C3C3C" />
 
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="10dp"
-                    android:background="@drawable/edittext_background"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/adharNo"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_background"
+                android:fontFamily="@font/acme"
+                android:hint="Adhar Card No."
+                android:padding="10dp"
+                android:textColorHint="#3C3C3C" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:id="@+id/drivingLicenceNo"
-                    android:hint="Driving Licence No.."
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/drivingLicenceNo"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_background"
+                android:fontFamily="@font/acme"
+                android:hint="Driving Licence No."
+                android:padding="10dp"
+                android:textColorHint="#3C3C3C" />
 
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="10dp"
-                    android:background="@drawable/edittext_background"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/vehicleNo"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_background"
+                android:fontFamily="@font/acme"
+                android:hint="Vehicle No."
+                android:padding="10dp"
+                android:textColorHint="#3C3C3C" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:id="@+id/vehicleNo"
-                    android:hint="Vehicle No.."
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/registerPhoneNo"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_background"
+                android:fontFamily="@font/acme"
+                android:hint="Phone No."
+                android:padding="10dp"
+                android:textColorHint="#3C3C3C" />
 
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="10dp"
-                    android:background="@drawable/edittext_background"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/registerEmail"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_background"
+                android:fontFamily="@font/acme"
+                android:hint="E-mail"
+                android:padding="10dp"
+                android:textColorHint="#3C3C3C" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:id="@+id/registerPhoneNo"
-                    android:hint="Phone No.."
-                    android:inputType="phone"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="10dp"
-                    android:background="@drawable/edittext_background"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/registerPassword"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_background"
+                android:fontFamily="@font/acme"
+                android:hint="Password"
+                android:textColorHint="#3C3C3C"
+                android:padding="10dp"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:id="@+id/registerEmail"
-                    android:hint="Email.."
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/registerConfPassword"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_background"
+                android:fontFamily="@font/acme"
+                android:hint="Confirm Password."
+                android:textColorHint="#3C3C3C"
+                android:padding="10dp"/>
 
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="10dp"
-                    android:background="@drawable/edittext_background"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:id="@+id/registerPassword"
-                    android:hint="Password.."
-
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="10dp"
-                    android:background="@drawable/edittext_background"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:id="@+id/registerConfPassword"
-                    android:hint="Confirm Password.."
-
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="10dp"
-                    android:background="@drawable/edittext_background"/>
-
-                <Button
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="submit"
-                    android:id="@+id/registerSubmitBtn"
-                    android:layout_marginBottom="20dp"/>
-
-
-
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="submit"
+                android:id="@+id/registerSubmitBtn"
+                android:backgroundTint="#474747"
+                android:layout_marginTop="10dp"/>
 
 
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

@@ -31,16 +31,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class RegisterActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
 
-    ImageView profilePic;
+    //ImageView profilePic;
+
+    CircleImageView profilePic;
 
     EditText firstName , lastName , adharNo ,drivingLicenceNo , vehicleNo ,
              registerPhoneNo , registerEmail , registerPassword, registerConfPassword ;
 
-    Button registerSubmitBtn;
+    Button registerSubmitBtn, BtnSelectImage;
 
     private Uri filePath;
 
@@ -57,13 +61,16 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        BtnSelectImage = findViewById(R.id.btn_select_img);
         profilePic = findViewById(R.id.profilePic);
         profilePic.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_baseline_account_circle_24));
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-        btn_upload = findViewById(R.id.btn_upload);
+
+
+        btn_upload = findViewById(R.id.btnUpload);
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         adharNo = findViewById(R.id.adharNo);
@@ -78,12 +85,19 @@ public class RegisterActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        profilePic.setOnClickListener(new View.OnClickListener() {
+        BtnSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectImage();
             }
         });
+
+       // profilePic.setOnClickListener(new View.OnClickListener() {
+         //   @Override
+           // public void onClick(View view) {
+                //selectImage();
+           // }
+        //});
 
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,12 +162,12 @@ public class RegisterActivity extends AppCompatActivity {
         if (filePath != null) {
 
             // Code for showing progressDialog while uploading
-            /*ProgressDialog progressDialog
-                    = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
+            //ProgressDialog progressDialog
+            //        = new ProgressDialog(this);
+           // progressDialog.setTitle("Uploading...");
+           // progressDialog.show();
 
-             */
+
 
             // Defining the child of storageReference
             StorageReference ref
@@ -267,4 +281,5 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
     }
+
 }
