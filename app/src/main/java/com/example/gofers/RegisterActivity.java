@@ -141,6 +141,20 @@ public class RegisterActivity extends AppCompatActivity {
                     map.put("Email",firstName.getText().toString().trim());
 
 
+                    Intent intent = new Intent(getApplicationContext(),ShowActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("firstName", firstName.toString());
+                    bundle.putString("lastName", lastName.toString());
+                    bundle.putString("aadhar",adharNo.toString());
+                    bundle.putString("DrivingLicence",drivingLicenceNo.toString());
+                    bundle.putString("VehicleNo",vehicleNo.toString());
+                    bundle.putString("PhoneNo",registerPhoneNo.toString());
+                    bundle.putString("Email",registerEmail.toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+
+
                     db.collection("New Driver").document(registerEmail.getText().toString())
                             .set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -154,6 +168,8 @@ public class RegisterActivity extends AppCompatActivity {
                     });
                 }
             }
+
+
         });
     }
 
