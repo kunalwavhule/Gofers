@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        BtnSelectImage = findViewById(R.id.btn_select_img);
+        //BtnSelectImage = findViewById(R.id.btn_select_img);
         profilePic = findViewById(R.id.profilePic);
         profilePic.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_baseline_account_circle_24));
 
@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        btn_upload = findViewById(R.id.btnUpload);
+        //btn_upload = findViewById(R.id.btnUpload);
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         adharNo = findViewById(R.id.adharNo);
@@ -85,26 +85,23 @@ public class RegisterActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        BtnSelectImage.setOnClickListener(new View.OnClickListener() {
+        profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectImage();
             }
         });
 
-       // profilePic.setOnClickListener(new View.OnClickListener() {
-         //   @Override
-           // public void onClick(View view) {
-                //selectImage();
-           // }
-        //});
 
-        btn_upload.setOnClickListener(new View.OnClickListener() {
+
+        profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadImage();
+                selectImage();
             }
         });
+
+
 
         registerSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +128,8 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Please confirm Your Password", Toast.LENGTH_SHORT).show();
                 }
                 else {
+
+                    uploadImage();
                     Map<String,Object>map = new HashMap<>();
                     map.put("FirstName",firstName.getText().toString().trim());
                     map.put("LastName",lastName.getText().toString().trim());
