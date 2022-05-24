@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
 
-    //ImageView profilePic;
+    ImageView adharImage , panImage;
 
     CircleImageView profilePic;
 
@@ -47,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button registerSubmitBtn, BtnSelectImage;
 
     private Uri filePath;
+    private String imageid;
 
 
     // request code
@@ -62,6 +63,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         //BtnSelectImage = findViewById(R.id.btn_select_img);
+
+        adharImage = findViewById(R.id.adharImage);
+        panImage = findViewById(R.id.panImage);
         profilePic = findViewById(R.id.profilePic);
         profilePic.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_baseline_account_circle_24));
 
@@ -88,15 +92,26 @@ public class RegisterActivity extends AppCompatActivity {
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                imageid = "profile";
                 selectImage();
             }
         });
 
 
 
-        profilePic.setOnClickListener(new View.OnClickListener() {
+        adharImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                imageid = "adhar";
+                selectImage();
+
+            }
+        });
+
+        panImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageid = "pan";
                 selectImage();
             }
         });
@@ -258,6 +273,8 @@ public class RegisterActivity extends AppCompatActivity {
                         intent,
                         "Select Image from here..."),
                 PICK_IMAGE_REQUEST);
+
+
     }
 
     @Override
@@ -289,12 +306,15 @@ public class RegisterActivity extends AppCompatActivity {
                         .getBitmap(
                                 getContentResolver(),
                                 filePath);
+
                 profilePic.setImageBitmap(bitmap);
+
             } catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();
             }
         }
     }
+
 
 }
