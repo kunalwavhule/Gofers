@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
 
-    //ImageView profilePic;
+    ImageView adharImage , panImage;
 
     CircleImageView profilePic;
 
@@ -47,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button registerSubmitBtn, BtnSelectImage;
 
     private Uri filePath;
+    private String imageid;
 
 
     // request code
@@ -61,7 +62,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        BtnSelectImage = findViewById(R.id.btn_select_img);
+        //BtnSelectImage = findViewById(R.id.btn_select_img);
+
+        adharImage = findViewById(R.id.adharImage);
+        panImage = findViewById(R.id.panImage);
         profilePic = findViewById(R.id.profilePic);
         profilePic.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_baseline_account_circle_24));
 
@@ -70,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        btn_upload = findViewById(R.id.btnUpload);
+        //btn_upload = findViewById(R.id.btnUpload);
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         adharNo = findViewById(R.id.adharNo);
@@ -85,26 +89,34 @@ public class RegisterActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        BtnSelectImage.setOnClickListener(new View.OnClickListener() {
+        profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                imageid = "profile";
                 selectImage();
             }
         });
 
-       // profilePic.setOnClickListener(new View.OnClickListener() {
-         //   @Override
-           // public void onClick(View view) {
-                //selectImage();
-           // }
-        //});
 
-        btn_upload.setOnClickListener(new View.OnClickListener() {
+
+        adharImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadImage();
+                imageid = "adhar";
+                selectImage();
+
             }
         });
+
+        panImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageid = "pan";
+                selectImage();
+            }
+        });
+
+
 
         registerSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +143,8 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Please confirm Your Password", Toast.LENGTH_SHORT).show();
                 }
                 else {
+
+                    uploadImage();
                     Map<String,Object>map = new HashMap<>();
                     map.put("FirstName",firstName.getText().toString().trim());
                     map.put("LastName",lastName.getText().toString().trim());
@@ -259,6 +273,8 @@ public class RegisterActivity extends AppCompatActivity {
                         intent,
                         "Select Image from here..."),
                 PICK_IMAGE_REQUEST);
+
+
     }
 
     @Override
@@ -290,12 +306,15 @@ public class RegisterActivity extends AppCompatActivity {
                         .getBitmap(
                                 getContentResolver(),
                                 filePath);
+
                 profilePic.setImageBitmap(bitmap);
+
             } catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();
             }
         }
     }
+
 
 }

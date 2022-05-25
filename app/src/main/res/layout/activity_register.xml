@@ -61,35 +61,21 @@
                     app:civ_border_width="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.17"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/btn_select_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="Select Image"
-                    android:backgroundTint="#474747"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.88"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
-                <Button
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload Image"
-                    android:id="@+id/btnUpload"
-                    android:backgroundTint="#474747"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.893"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
+                    android:text="Select Profile Icon to select Image"
+                    app:layout_constraintEnd_toEndOf="@+id/profilePic"
+                    android:fontFamily="@font/acme"
+                    android:textStyle="italic"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="@+id/profilePic"
+                    app:layout_constraintTop_toBottomOf="@+id/profilePic" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -132,6 +118,54 @@
                 android:inputType="number"
                 android:padding="10dp"
                 android:textColorHint="#3C3C3C" />
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/adharImage"
+                android:src="@drawable/ic_baseline_cloud_upload_24"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="100dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click on upload icon to upload adhar card image"
+                android:fontFamily="@font/acme"
+                android:textStyle="italic"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/panNo"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_background"
+                android:fontFamily="@font/acme"
+                android:hint="PAN Card No."
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColorHint="#3C3C3C" />
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/panImage"
+                android:src="@drawable/ic_baseline_cloud_upload_24"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="100dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click on upload icon to upload Pan card image"
+                android:fontFamily="@font/acme"
+                android:textStyle="italic"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"/>
 
             <EditText
                 android:layout_width="match_parent"
