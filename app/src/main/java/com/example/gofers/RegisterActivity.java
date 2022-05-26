@@ -151,8 +151,8 @@ public class RegisterActivity extends AppCompatActivity {
                     map.put("AdharNo.",adharNo.getText().toString().trim());
                     map.put("DrivingLicence",drivingLicenceNo.getText().toString().trim());
                     map.put("VehicleNo",vehicleNo.getText().toString().trim());
-                    map.put("PhoneNo.",firstName.getText().toString().trim());
-                    map.put("Email",firstName.getText().toString().trim());
+                    map.put("PhoneNo.",registerPhoneNo.getText().toString().trim());
+                    map.put("Email",registerEmail.getText().toString().trim());
 
 
                     Intent intent = new Intent(getApplicationContext(),ShowActivity.class);
@@ -165,7 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
                     bundle.putString("PhoneNo",registerPhoneNo.toString());
                     bundle.putString("Email",registerEmail.toString());
                     intent.putExtras(bundle);
-                    startActivity(intent);
+                    //startActivity(intent);
 
 
 
@@ -204,7 +204,7 @@ public class RegisterActivity extends AppCompatActivity {
                     = storageReference
                     .child(
                             "images/"
-                                    + UUID.randomUUID().toString());
+                                    + registerEmail.getText().toString());
 
             // adding listeners on upload
             // or failure of image
@@ -225,6 +225,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                     "Image Uploaded!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
+                                    startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                                 }
                             })
 
@@ -306,8 +307,13 @@ public class RegisterActivity extends AppCompatActivity {
                         .getBitmap(
                                 getContentResolver(),
                                 filePath);
-
+                if(imageid == "profile"){
                 profilePic.setImageBitmap(bitmap);
+                }else if (imageid == "adhar"){
+                    adharImage.setImageBitmap(bitmap);
+                }else if (imageid == "pan"){
+                    panImage.setImageBitmap(bitmap);
+                }
 
             } catch (IOException e) {
                 // Log the exception
