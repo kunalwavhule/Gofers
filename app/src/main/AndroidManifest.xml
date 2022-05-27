@@ -15,9 +15,14 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".VerificationActivity"
+            android:exported="false" />
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -119,23 +119,6 @@
                 android:padding="10dp"
                 android:textColorHint="#3C3C3C" />
 
-            <ImageView
-                android:layout_width="250dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/adharImage"
-                android:src="@drawable/ic_baseline_cloud_upload_24"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="100dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Click on upload icon to upload adhar card image"
-                android:fontFamily="@font/acme"
-                android:textStyle="italic"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center_horizontal"/>
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -149,23 +132,6 @@
                 android:inputType="number"
                 android:padding="10dp"
                 android:textColorHint="#3C3C3C" />
-
-            <ImageView
-                android:layout_width="250dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/panImage"
-                android:src="@drawable/ic_baseline_cloud_upload_24"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="100dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Click on upload icon to upload Pan card image"
-                android:fontFamily="@font/acme"
-                android:textStyle="italic"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center_horizontal"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -205,45 +171,6 @@
                 android:hint="Phone No."
                 android:padding="10dp"
                 android:textColorHint="#3C3C3C" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/registerEmail"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/acme"
-                android:hint="E-mail"
-                android:padding="10dp"
-                android:textColorHint="#3C3C3C" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/registerPassword"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/acme"
-                android:hint="Password"
-                android:textColorHint="#3C3C3C"
-                android:padding="10dp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/registerConfPassword"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/acme"
-                android:hint="Confirm Password."
-                android:textColorHint="#3C3C3C"
-                android:padding="10dp"/>
 
             <Button
                 android:layout_width="wrap_content"

@@ -4,22 +4,31 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -30,6 +39,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -37,17 +47,25 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
 
-    ImageView adharImage , panImage;
+    //ImageView adharImage , panImage;
 
     CircleImageView profilePic;
 
     EditText firstName , lastName , adharNo ,drivingLicenceNo , vehicleNo ,
-             registerPhoneNo , registerEmail , registerPassword, registerConfPassword ;
+             registerPhoneNo ;
+
+    ProgressDialog dialog;
 
     Button registerSubmitBtn, BtnSelectImage;
 
     private Uri filePath;
     private String imageid;
+
+
+    // ProgressBar progressBar1;
+
+    private FirebaseAuth mAuth;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
 
 
     // request code
@@ -64,8 +82,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         //BtnSelectImage = findViewById(R.id.btn_select_img);
 
-        adharImage = findViewById(R.id.adharImage);
-        panImage = findViewById(R.id.panImage);
+        //adharImage = findViewById(R.id.adharImage);
+        //panImage = findViewById(R.id.panImage);
+
+
+        mAuth = FirebaseAuth.getInstance();
         profilePic = findViewById(R.id.profilePic);
         profilePic.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_baseline_account_circle_24));
 
@@ -81,9 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
         drivingLicenceNo = findViewById(R.id.drivingLicenceNo);
         vehicleNo = findViewById(R.id.vehicleNo);
         registerPhoneNo = findViewById(R.id.registerPhoneNo);
-        registerEmail = findViewById(R.id.registerEmail);
-        registerPassword = findViewById(R.id.registerPassword);
-        registerConfPassword = findViewById(R.id.registerConfPassword);
+
 
         registerSubmitBtn = findViewById(R.id.registerSubmitBtn);
 
@@ -99,22 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        adharImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                imageid = "adhar";
-                selectImage();
 
-            }
-        });
-
-        panImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                imageid = "pan";
-                selectImage();
-            }
-        });
 
 
 
@@ -135,15 +139,16 @@ public class RegisterActivity extends AppCompatActivity {
                      Toast.makeText(RegisterActivity.this, "Vehicle No. is Required", Toast.LENGTH_SHORT).show();
                 }else if (TextUtils.isEmpty(registerPhoneNo.getText().toString().trim())){
                     Toast.makeText(RegisterActivity.this, "Phone No. is Required", Toast.LENGTH_SHORT).show();
-                }else if (TextUtils.isEmpty(registerEmail.getText().toString().trim())){
-                     Toast.makeText(RegisterActivity.this, "Email is Required", Toast.LENGTH_SHORT).show();
-                }else if (TextUtils.isEmpty(registerPassword.getText().toString().trim())){
-                     Toast.makeText(RegisterActivity.this, "password is Required", Toast.LENGTH_SHORT).show();
-                }else if (TextUtils.isEmpty(registerConfPassword.getText().toString().trim())){
-                    Toast.makeText(RegisterActivity.this, "Please confirm Your Password", Toast.LENGTH_SHORT).show();
+
+
+                }else  if (registerPhoneNo.getText().length() != 10){
+                    Toast.makeText(RegisterActivity.this, "Invalid Phone No.", Toast.LENGTH_SHORT).show();
+                }else if (adharNo.getText().length()!=16){
+                    Toast.makeText(RegisterActivity.this, "Adhar no. Should be 16 digit long", Toast.LENGTH_SHORT).show();
                 }
                 else {
-
+                    dialog = ProgressDialog.show(RegisterActivity.this,"Loading","Please Wait",true);
+                    otpSend();
                     uploadImage();
                     Map<String,Object>map = new HashMap<>();
                     map.put("FirstName",firstName.getText().toString().trim());
@@ -152,10 +157,10 @@ public class RegisterActivity extends AppCompatActivity {
                     map.put("DrivingLicence",drivingLicenceNo.getText().toString().trim());
                     map.put("VehicleNo",vehicleNo.getText().toString().trim());
                     map.put("PhoneNo.",registerPhoneNo.getText().toString().trim());
-                    map.put("Email",registerEmail.getText().toString().trim());
 
 
-                    Intent intent = new Intent(getApplicationContext(),ShowActivity.class);
+
+                    Intent intent1 = new Intent(getApplicationContext(),ShowActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("firstName", firstName.toString());
                     bundle.putString("lastName", lastName.toString());
@@ -163,13 +168,13 @@ public class RegisterActivity extends AppCompatActivity {
                     bundle.putString("DrivingLicence",drivingLicenceNo.toString());
                     bundle.putString("VehicleNo",vehicleNo.toString());
                     bundle.putString("PhoneNo",registerPhoneNo.toString());
-                    bundle.putString("Email",registerEmail.toString());
-                    intent.putExtras(bundle);
+
+                    intent1.putExtras(bundle);
                     //startActivity(intent);
 
 
 
-                    db.collection("New Driver").document(registerEmail.getText().toString())
+                    db.collection("New Driver").document(registerPhoneNo.getText().toString())
                             .set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -204,7 +209,7 @@ public class RegisterActivity extends AppCompatActivity {
                     = storageReference
                     .child(
                             "images/"
-                                    + registerEmail.getText().toString());
+                                    + registerPhoneNo.getText().toString());
 
             // adding listeners on upload
             // or failure of image
@@ -225,7 +230,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                     "Image Uploaded!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
-                                    startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                                   // startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                                 }
                             })
 
@@ -307,19 +312,62 @@ public class RegisterActivity extends AppCompatActivity {
                         .getBitmap(
                                 getContentResolver(),
                                 filePath);
-                if(imageid == "profile"){
+
                 profilePic.setImageBitmap(bitmap);
-                }else if (imageid == "adhar"){
-                    adharImage.setImageBitmap(bitmap);
-                }else if (imageid == "pan"){
-                    panImage.setImageBitmap(bitmap);
-                }
+
 
             } catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();
             }
         }
+    }
+
+    private void otpSend() {
+
+
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            private PhoneAuthCredential credential;
+
+            @Override
+            public void onVerificationCompleted(PhoneAuthCredential credential) {
+
+            }
+
+            @Override
+            public void onVerificationFailed(FirebaseException e) {
+                //btnContinue.setVisibility(View.VISIBLE);
+                //progressBar1.setVisibility(View.GONE);
+                Toast.makeText(RegisterActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Log.d("kkkkkk",e.getLocalizedMessage());
+                dialog.dismiss();
+
+            }
+
+            @Override
+            public void onCodeSent(@NonNull String verificationId,
+                                   @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                dialog.dismiss();
+
+                Intent intent = new Intent(RegisterActivity.this,VerificationActivity.class);
+                intent.putExtra("phone",registerPhoneNo.getText().toString().trim());
+                intent.putExtra("verificationId",verificationId);
+                startActivity(intent);
+
+            }
+
+
+        };
+
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber("+91"+registerPhoneNo.getText().toString().trim())       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(this)                 // Activity (for callback binding)
+                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
     }
 
 
