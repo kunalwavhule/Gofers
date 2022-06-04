@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailsActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="411dp"
+        android:layout_height="191dp"
+        android:background="#1f75fe"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:text="Please Complete all the Steps to activate your account"
+            android:textColor="#E1DFDF"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="110dp"
+            android:layout_height="106dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="35dp"
+
+            app:srcCompat="@drawable/ic_baseline_article_24" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/adhar_card"
+        android:layout_width="370dp"
+        android:layout_height="70dp"
+
+        android:layout_marginTop="116dp"
+        android:background="@drawable/custom_edittetext_"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_edittetext_">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:text="Adhar Card"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="170dp"
+                android:src="@drawable/ic_baseline_arrow_forward_24" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/driving_card"
+        android:layout_width="370dp"
+        android:layout_height="70dp"
+
+        android:layout_marginTop="22dp"
+        android:background="@drawable/custom_edittetext_"
+        app:layout_constraintEnd_toEndOf="@+id/adhar_card"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/adhar_card"
+        app:layout_constraintTop_toBottomOf="@+id/adhar_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_edittetext_">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:text="Driving Licence"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="120dp"
+                android:src="@drawable/ic_baseline_arrow_forward_24" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rc_card"
+        android:layout_width="370dp"
+        android:layout_height="70dp"
+
+        android:layout_marginTop="22dp"
+        android:background="@drawable/custom_edittetext_"
+        app:layout_constraintEnd_toEndOf="@+id/driving_card"
+        app:layout_constraintStart_toStartOf="@+id/driving_card"
+        app:layout_constraintTop_toBottomOf="@+id/driving_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_edittetext_">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:text="Vehicle RC"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="170dp"
+                android:src="@drawable/ic_baseline_arrow_forward_24" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="370dp"
+        android:layout_height="70dp"
+        android:id="@+id/profile_card"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/custom_edittetext_"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/rc_card"
+        app:layout_constraintStart_toStartOf="@+id/rc_card"
+        app:layout_constraintTop_toBottomOf="@+id/rc_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_edittetext_">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:text="Profile info"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="170dp"
+                android:src="@drawable/ic_baseline_arrow_forward_24" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

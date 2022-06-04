@@ -11,13 +11,23 @@
         <entry key="..\:/Gofers/app/src/main/res/layout/toolbar.xml" value="0.25416666666666665" />
         <entry key="..\:/Gofers/app/src/main/res/menu/drawer_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Gofers/app/src/main/res/menu/nav_header.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/drawable-v24/custom_edittetext_.xml" value="0.18" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/drawable/custom_edittetext.xml" value="0.18" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/drawable/edittext_background.xml" value="0.18" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.18" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/drawable/ic_baseline_article_24.xml" value="0.18" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/drawable/ic_baseline_verified_user_24.xml" value="0.18" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/drawable/image_backgroung.xml" value="0.18" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_details.xml" value="0.264" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_fragment.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_main.xml" value="0.13958333333333334" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_show.xml" value="0.1046875" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_splash_screen.xml" value="0.264" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_verification.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/fragment_adhar.xml" value="0.264" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/fragment_driving.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/fragment_r_c.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/nav_header.xml" value="0.2234375" />
       </map>
     </option>
