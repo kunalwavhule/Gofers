@@ -51,6 +51,13 @@ public class DetailsActivity extends AppCompatActivity {
                 startActivity(new Intent(DetailsActivity.this,FragmentActivity.class));
             }
         });
+        profile_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectionId = "profile";
+                startActivity(new Intent(DetailsActivity.this,FragmentActivity.class));
+            }
+        });
 
 
     }

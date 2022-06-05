@@ -19,7 +19,7 @@
                 android:id="@+id/titletxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/baloo_bhai"
                 android:text="SIGN UP"
@@ -32,151 +32,56 @@
                 android:id="@+id/creategofer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="@font/amaranth_bold"
                 android:text="Create Gofers Cab Account :"
-                android:textSize="20dp" />
+                android:textSize="23dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/amaranth_bold"
+                android:text="You need toEnter Your Phone no. to Continue:"
+                android:textSize="22dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:fontFamily="@font/acme"
-                android:text="Fill Your All Details Corectly Below :"
+                android:layout_marginTop="25dp"
+                android:id="@+id/et_phone"
+                android:hint="Enter Your Phone No.."
+                android:padding="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/edittext_background"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="By Clicking on 'Continue' you are agreeing to our terms of use"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/acme"
+                android:textAlignment="center"
+                android:layout_marginTop="20dp"
                 android:textSize="18dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
-
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profilePic"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_baseline_account_circle_24"
-                    app:civ_border_color="#FF000000"
-                    app:civ_border_width="2dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Select Profile Icon to select Image"
-                    app:layout_constraintEnd_toEndOf="@+id/profilePic"
-                    android:fontFamily="@font/acme"
-                    android:textStyle="italic"
-                    android:layout_marginTop="12dp"
-                    app:layout_constraintStart_toStartOf="@+id/profilePic"
-                    app:layout_constraintTop_toBottomOf="@+id/profilePic" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/firstName"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/acme"
-                android:hint="First Name"
-                android:padding="10dp"
-                android:textColorHint="#3C3C3C" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/lastName"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/acme"
-                android:hint="Last Name"
-                android:padding="10dp"
-                android:textColorHint="#3C3C3C" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:id="@+id/adharNo"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/acme"
-                android:hint="Adhar Card No."
-                android:inputType="number"
-                android:padding="10dp"
-                android:textColorHint="#3C3C3C" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:id="@+id/panNo"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/acme"
-                android:hint="PAN Card No."
-                android:inputType="number"
-                android:padding="10dp"
-                android:textColorHint="#3C3C3C" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:id="@+id/drivingLicenceNo"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/acme"
-                android:hint="Driving Licence No."
-                android:padding="10dp"
-                android:textColorHint="#3C3C3C" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:id="@+id/vehicleNo"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/acme"
-                android:hint="Vehicle No."
-                android:padding="10dp"
-                android:textColorHint="#3C3C3C" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/registerPhoneNo"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/edittext_background"
-                android:fontFamily="@font/acme"
-                android:hint="Phone No."
-                android:padding="10dp"
-                android:textColorHint="#3C3C3C" />
+                android:layout_marginTop="20dp"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="submit"
+                android:text="Continue"
                 android:id="@+id/registerSubmitBtn"
                 android:backgroundTint="#474747"
                 android:layout_marginTop="10dp"/>

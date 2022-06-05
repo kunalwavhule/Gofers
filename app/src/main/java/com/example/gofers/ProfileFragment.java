@@ -12,86 +12,105 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class AdharFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    ImageView adharImage;
-
-    private final int PICK_IMAGE_REQUEST = 23;
+    CircleImageView profilePic;
     private Uri filePath;
-    Button SubmitBtn;
-    ProgressDialog dialog;
-    FirebaseAuth mAuth;
-    EditText et_adhar;
+    FirebaseFirestore db;
+
+    EditText et_firstname,et_lastname,et_email;
+    Button submit_btn;
 
     FirebaseStorage storage;
     StorageReference storageReference;
+    FirebaseAuth mAuth;
+
+    private final int PICK_IMAGE_REQUEST = 28;
+
+    ProgressDialog dialog;
+
+    public ProfileFragment() {
+        // Required empty public constructor
+    }
 
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_adhar, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         mAuth = FirebaseAuth.getInstance();
-        adharImage = view.findViewById(R.id.adharImageUpload);
-        et_adhar = view.findViewById(R.id.et_adhar);
-        SubmitBtn = view.findViewById(R.id.adharSubmitBtn);
+        db = FirebaseFirestore.getInstance();
+        profilePic = view.findViewById(R.id.profilePic);
+        et_firstname = view.findViewById(R.id.et_firstname);
+        et_lastname = view.findViewById(R.id.et_lastname);
+        et_email = view.findViewById(R.id.et_email);
+        submit_btn = view.findViewById(R.id.profileSubmitBtn);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-        adharImage.setOnClickListener(new View.OnClickListener() {
+
+        submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectImage();
+                if (TextUtils.isEmpty(et_firstname.getText().toString().trim())){
+                    Toast.makeText(getContext(), "First name Required", Toast.LENGTH_SHORT).show();
+
+                }else if (TextUtils.isEmpty(et_lastname.getText().toString().trim())){
+                    Toast.makeText(getContext(), "Last name Required", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(et_email.getText().toString().trim())){
+                    Toast.makeText(getContext(), "email is Required", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    dialog = ProgressDialog.show(getContext(), "Loading", "Please Wait", true);
+                    Map<String,Object>map = new HashMap<>();
+                    map.put("firstName",et_firstname.getText().toString().trim());
+                    map.put("lastName",et_lastname.getText().toString().trim());
+                    map.put("email",et_email.getText().toString().trim());
+                    db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).set(map);
+
+
+                    uploadImage();
+                }
             }
         });
 
-        SubmitBtn.setOnClickListener(new View.OnClickListener() {
+        profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (et_adhar.getText().toString().trim().length()!=16){
-                    Toast.makeText(getContext(), "Enter Valid Adhar Card No.", Toast.LENGTH_SHORT).show();
-                }else {
-                    dialog = ProgressDialog.show(getContext(), "Loading", "Please Wait", true);
-                    uploadImage();
-                }
+
+                selectImage();
             }
         });
         return view;
     }
 
-    private void selectImage() {
-
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(
-                Intent.createChooser(
-                        intent,
-                        "Select Image from here..."),
-                PICK_IMAGE_REQUEST);
-
-
-    }
 
     private void uploadImage() {
 
@@ -108,7 +127,7 @@ public class AdharFragment extends Fragment {
             // Defining the child of storageReference
             StorageReference ref
                     = storageReference
-                    .child("Driver").child(mAuth.getCurrentUser().getPhoneNumber()).child("adhar");
+                    .child("Driver").child(mAuth.getCurrentUser().getPhoneNumber()).child("profile");
 
             // adding listeners on upload
             // or failure of image
@@ -170,7 +189,19 @@ public class AdharFragment extends Fragment {
         }
     }
 
+    private void selectImage() {
 
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(
+                        intent,
+                        "Select Image from here..."),
+                PICK_IMAGE_REQUEST);
+
+
+    }
 
     @Override
     public void onActivityResult(int requestCode,
@@ -199,10 +230,10 @@ public class AdharFragment extends Fragment {
                         .Images
                         .Media
                         .getBitmap(
-                                getActivity().getContentResolver(),
+                                getContext().getContentResolver(),
                                 filePath);
 
-                adharImage.setImageBitmap(bitmap);
+                profilePic.setImageBitmap(bitmap);
 
 
             } catch (IOException e) {

@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -39,6 +40,8 @@ public class RCFragment extends Fragment {
     Button SubmitBtn;
     EditText et_rc;
 
+    FirebaseAuth mAuth;
+
     FirebaseStorage storage;
     ProgressDialog dialog;
     StorageReference storageReference;
@@ -50,7 +53,7 @@ public class RCFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_r_c, container, false);
-
+        mAuth = FirebaseAuth.getInstance();
         rcImage = view.findViewById(R.id.rcImageUpload);
         et_rc = view.findViewById(R.id.et_rc);
         SubmitBtn = view.findViewById(R.id.rcSubmitBtn);
@@ -67,8 +70,8 @@ public class RCFragment extends Fragment {
         SubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (et_rc.getText().toString().trim().length()!=16){
-                    Toast.makeText(getContext(), "Enter Valid Adhar Card No.", Toast.LENGTH_SHORT).show();
+                if (et_rc.getText().toString().trim().length()==0){
+                    Toast.makeText(getContext(), "Enter Valid RC No.", Toast.LENGTH_SHORT).show();
                 }else {
                     dialog = ProgressDialog.show(getContext(), "Loading", "Please Wait", true);
                     uploadImage();
@@ -107,9 +110,7 @@ public class RCFragment extends Fragment {
             // Defining the child of storageReference
             StorageReference ref
                     = storageReference
-                    .child(
-                            "images/"
-                                    + "rcimagenew");
+                    .child("Driver").child(mAuth.getCurrentUser().getPhoneNumber()).child("rc");
 
             // adding listeners on upload
             // or failure of image

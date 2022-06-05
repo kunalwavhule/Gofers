@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:layout_marginTop="16dp"
@@ -22,7 +22,7 @@
         android:text="Adhar Verification"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="40dp"
+        android:textSize="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,10 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="304dp"
+
+        android:layout_below="@id/textView12"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/amaranth_bold"
         android:text="Enter Adhar Number :"
         android:textSize="25dp"
@@ -45,7 +48,8 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="110dp"
         android:fontFamily="@font/amaranth_bold"
         android:text="Upload Adhar Image :"
         android:textSize="25dp"
@@ -58,6 +62,8 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/adharImageUpload"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/acme"
         android:text="Select image by clicking on above box"
@@ -73,8 +79,10 @@
         android:id="@+id/textView11"
         android:layout_width="330dp"
         android:layout_height="69dp"
-        android:layout_marginTop="20dp"
+        android:layout_below="@id/et_adhar"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/acme"
+        android:layout_centerInParent="true"
         android:text="*Use Full and Clear Adhar Card Image For Upload. Pocket Size Adhar will rejected"
         android:textAlignment="center"
         android:textColor="#616161"
@@ -88,10 +96,12 @@
 
     <ImageView
         android:id="@+id/adharImageUpload"
-        android:layout_width="289dp"
-        android:layout_height="139dp"
+        android:layout_width="250dp"
+        android:layout_height="130dp"
+        android:layout_below="@id/textView17"
+        android:layout_centerHorizontal="true"
 
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
 
         android:background="@drawable/image_backgroung"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,9 +112,12 @@
         android:id="@+id/et_adhar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginStart="24dp"
+        android:layout_below="@id/textView13"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:textColorHint="#3C3C3C"
+        android:fontFamily="@font/acme"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="232dp"
         android:background="@drawable/custom_edittetext_"
         android:hint="Enter Adhar No. Here"
         android:padding="10dp"
@@ -117,7 +130,8 @@
         android:id="@+id/adharSubmitBtn"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_below="@id/textView11"
+        android:layout_centerHorizontal="true"
         android:backgroundTint="@color/purple_500"
         android:fontFamily="@font/acme"
         android:text="Submit"
@@ -127,4 +141,4 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

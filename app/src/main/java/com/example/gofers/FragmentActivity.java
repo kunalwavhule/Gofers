@@ -26,8 +26,10 @@ public class FragmentActivity extends AppCompatActivity {
 
             fm.add(R.id.fragment_container,new RCFragment()).commit();
 
-        }else{
+        }else if(DetailsActivity.selectionId == "driving"){
             fm.add(R.id.fragment_container,new DrivingFragment()).commit();
+        }else{
+            fm.add(R.id.fragment_container,new ProfileFragment()).commit();
         }
 
 

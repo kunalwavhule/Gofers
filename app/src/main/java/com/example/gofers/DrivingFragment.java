@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -39,6 +40,8 @@ public class DrivingFragment extends Fragment {
     Button SubmitBtn;
     EditText et_driving;
 
+    FirebaseAuth mAuth;
+
     FirebaseStorage storage;
     ProgressDialog dialog;
     StorageReference storageReference;
@@ -52,6 +55,7 @@ public class DrivingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_driving, container, false);
 
         licenceImage = view.findViewById(R.id.licenceImageUpload);
+        mAuth = FirebaseAuth.getInstance();
         et_driving = view.findViewById(R.id.et_driving);
         SubmitBtn = view.findViewById(R.id.licenceSubmitBtn);
         storage = FirebaseStorage.getInstance();
@@ -66,8 +70,8 @@ public class DrivingFragment extends Fragment {
         SubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (et_driving.getText().toString().trim().length()!=16){
-                    Toast.makeText(getContext(), "Enter Valid Adhar Card No.", Toast.LENGTH_SHORT).show();
+                if (et_driving.getText().toString().trim().length()==0){
+                    Toast.makeText(getContext(), "Enter Valid Licence No.", Toast.LENGTH_SHORT).show();
                 }else {
                     dialog = ProgressDialog.show(getContext(), "Loading", "Please Wait", true);
                     uploadImage();
@@ -106,9 +110,7 @@ public class DrivingFragment extends Fragment {
             // Defining the child of storageReference
             StorageReference ref
                     = storageReference
-                    .child(
-                            "images/"
-                                    + "licenceimagenew");
+                    .child("Driver").child(mAuth.getCurrentUser().getPhoneNumber()).child("licence");
 
             // adding listeners on upload
             // or failure of image
