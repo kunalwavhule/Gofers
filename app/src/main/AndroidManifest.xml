@@ -10,18 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gofers">
         <activity
+            android:name=".UnderVerificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".FragmentActivity"
-            android:exported="false" >
-
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".DetailsActivity"
-            android:exported="false">
-
-
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".ShowActivity"
             android:exported="false" />
@@ -34,7 +30,6 @@
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

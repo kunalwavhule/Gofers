@@ -23,12 +23,15 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class DrivingFragment extends Fragment {
@@ -41,7 +44,7 @@ public class DrivingFragment extends Fragment {
     EditText et_driving;
 
     FirebaseAuth mAuth;
-
+    FirebaseFirestore db;
     FirebaseStorage storage;
     ProgressDialog dialog;
     StorageReference storageReference;
@@ -55,6 +58,7 @@ public class DrivingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_driving, container, false);
 
         licenceImage = view.findViewById(R.id.licenceImageUpload);
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         et_driving = view.findViewById(R.id.et_driving);
         SubmitBtn = view.findViewById(R.id.licenceSubmitBtn);
@@ -73,7 +77,10 @@ public class DrivingFragment extends Fragment {
                 if (et_driving.getText().toString().trim().length()==0){
                     Toast.makeText(getContext(), "Enter Valid Licence No.", Toast.LENGTH_SHORT).show();
                 }else {
-                    dialog = ProgressDialog.show(getContext(), "Loading", "Please Wait", true);
+                    dialog = ProgressDialog.show(getContext(), "Uploading", "Please Wait", true);
+                    Map<String,Object>map = new HashMap<>();
+                    map.put("Licence",et_driving.getText().toString().trim());
+                    db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).update(map);
                     uploadImage();
                 }
             }

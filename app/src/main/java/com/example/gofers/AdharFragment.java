@@ -23,12 +23,15 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AdharFragment extends Fragment {
@@ -40,6 +43,7 @@ public class AdharFragment extends Fragment {
     Button SubmitBtn;
     ProgressDialog dialog;
     FirebaseAuth mAuth;
+    FirebaseFirestore db;
     EditText et_adhar;
 
     FirebaseStorage storage;
@@ -54,6 +58,7 @@ public class AdharFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_adhar, container, false);
         mAuth = FirebaseAuth.getInstance();
         adharImage = view.findViewById(R.id.adharImageUpload);
+        db = FirebaseFirestore.getInstance();
         et_adhar = view.findViewById(R.id.et_adhar);
         SubmitBtn = view.findViewById(R.id.adharSubmitBtn);
         storage = FirebaseStorage.getInstance();
@@ -71,7 +76,10 @@ public class AdharFragment extends Fragment {
                 if (et_adhar.getText().toString().trim().length()!=16){
                     Toast.makeText(getContext(), "Enter Valid Adhar Card No.", Toast.LENGTH_SHORT).show();
                 }else {
-                    dialog = ProgressDialog.show(getContext(), "Loading", "Please Wait", true);
+                    dialog = ProgressDialog.show(getContext(), "Uploading", "Please Wait", true);
+                    Map<String,Object> map = new HashMap<>();
+                    map.put("adhar",et_adhar.getText().toString().trim());
+                    db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).set(map);
                     uploadImage();
                 }
             }

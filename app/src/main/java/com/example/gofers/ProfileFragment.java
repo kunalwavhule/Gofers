@@ -88,12 +88,12 @@ public class ProfileFragment extends Fragment {
                     Toast.makeText(getContext(), "email is Required", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    dialog = ProgressDialog.show(getContext(), "Loading", "Please Wait", true);
+                    dialog = ProgressDialog.show(getContext(), "Uploading", "Please Wait", true);
                     Map<String,Object>map = new HashMap<>();
                     map.put("firstName",et_firstname.getText().toString().trim());
                     map.put("lastName",et_lastname.getText().toString().trim());
                     map.put("email",et_email.getText().toString().trim());
-                    db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).set(map);
+                    db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).update(map);
 
 
                     uploadImage();
@@ -149,7 +149,7 @@ public class ProfileFragment extends Fragment {
                                                     "Image Uploaded!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
-                                    // startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                                    startActivity(new Intent(getActivity(),UnderVerificationActivity.class));
                                 }
                             })
 
