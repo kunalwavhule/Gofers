@@ -73,7 +73,7 @@ public class AdharFragment extends Fragment {
         SubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (et_adhar.getText().toString().trim().length()!=16){
+                if (et_adhar.getText().toString().trim().length()!=12){
                     Toast.makeText(getContext(), "Enter Valid Adhar Card No.", Toast.LENGTH_SHORT).show();
                 }else {
                     dialog = ProgressDialog.show(getContext(), "Uploading", "Please Wait", true);
@@ -132,12 +132,14 @@ public class AdharFragment extends Fragment {
                                     // Image uploaded successfully
                                     // Dismiss dialog
                                     //progressDialog.dismiss();
+
                                     dialog.dismiss();
                                     Toast
                                             .makeText(getContext(),
                                                     "Image Uploaded!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
+                                    startActivity(new Intent(getActivity(),DetailsActivity.class));
                                     // startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                                 }
                             })
@@ -175,6 +177,9 @@ public class AdharFragment extends Fragment {
                                     //            + (int)progress + "%");
                                 }
                             });
+        }else{
+            dialog.dismiss();
+            Toast.makeText(getContext(), "You need to select image", Toast.LENGTH_SHORT).show();
         }
     }
 

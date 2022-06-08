@@ -141,6 +141,7 @@ public class RCFragment extends Fragment {
                                                     "Image Uploaded!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
+                                    startActivity(new Intent(getActivity(),DetailsActivity.class));
                                     // startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                                 }
                             })
@@ -152,6 +153,10 @@ public class RCFragment extends Fragment {
 
                             // Error, Image not uploaded
                             //progressDialog.dismiss();
+                            Map<String,Object>map = new HashMap<>();
+                            map.put("rStatus","uploaded");
+                            db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber())
+                                    .update(map);
                             dialog.dismiss();
                             Toast
                                     .makeText(getContext(),
@@ -178,6 +183,10 @@ public class RCFragment extends Fragment {
                                     //            + (int)progress + "%");
                                 }
                             });
+        }
+        else{
+            dialog.dismiss();
+            Toast.makeText(getContext(), "You need to select image", Toast.LENGTH_SHORT).show();
         }
     }
 

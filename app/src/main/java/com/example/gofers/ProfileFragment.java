@@ -93,6 +93,7 @@ public class ProfileFragment extends Fragment {
                     map.put("firstName",et_firstname.getText().toString().trim());
                     map.put("lastName",et_lastname.getText().toString().trim());
                     map.put("email",et_email.getText().toString().trim());
+                    map.put("isVerified","false");
                     db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).update(map);
 
 
@@ -149,7 +150,8 @@ public class ProfileFragment extends Fragment {
                                                     "Image Uploaded!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
-                                    startActivity(new Intent(getActivity(),UnderVerificationActivity.class));
+                                    startActivity(new Intent(getActivity(),DetailsActivity.class));
+                                    //startActivity(new Intent(getActivity(),UnderVerificationActivity.class));
                                 }
                             })
 
@@ -160,6 +162,10 @@ public class ProfileFragment extends Fragment {
 
                             // Error, Image not uploaded
                             //progressDialog.dismiss();
+                            Map<String,Object>map = new HashMap<>();
+                            map.put("pStatus","uploaded");
+                            db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber())
+                                    .update(map);
                             dialog.dismiss();
                             Toast
                                     .makeText(getContext(),
@@ -186,6 +192,11 @@ public class ProfileFragment extends Fragment {
                                     //            + (int)progress + "%");
                                 }
                             });
+        }
+
+        else{
+            dialog.dismiss();
+            Toast.makeText(getContext(), "You need to select image", Toast.LENGTH_SHORT).show();
         }
     }
 

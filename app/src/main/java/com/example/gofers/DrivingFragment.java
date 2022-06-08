@@ -79,7 +79,7 @@ public class DrivingFragment extends Fragment {
                 }else {
                     dialog = ProgressDialog.show(getContext(), "Uploading", "Please Wait", true);
                     Map<String,Object>map = new HashMap<>();
-                    map.put("Licence",et_driving.getText().toString().trim());
+                    map.put("licence",et_driving.getText().toString().trim());
                     db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).update(map);
                     uploadImage();
                 }
@@ -133,12 +133,14 @@ public class DrivingFragment extends Fragment {
                                     // Image uploaded successfully
                                     // Dismiss dialog
                                     //progressDialog.dismiss();
+
                                     dialog.dismiss();
                                     Toast
                                             .makeText(getContext(),
                                                     "Image Uploaded!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
+                                    startActivity(new Intent(getActivity(),DetailsActivity.class));
                                     // startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                                 }
                             })
@@ -176,6 +178,11 @@ public class DrivingFragment extends Fragment {
                                     //            + (int)progress + "%");
                                 }
                             });
+        }
+
+        else{
+            dialog.dismiss();
+            Toast.makeText(getContext(), "You need to select image", Toast.LENGTH_SHORT).show();
         }
     }
 
