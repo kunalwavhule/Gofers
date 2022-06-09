@@ -89,12 +89,7 @@ public class ProfileFragment extends Fragment {
                 }
                 else {
                     dialog = ProgressDialog.show(getContext(), "Uploading", "Please Wait", true);
-                    Map<String,Object>map = new HashMap<>();
-                    map.put("firstName",et_firstname.getText().toString().trim());
-                    map.put("lastName",et_lastname.getText().toString().trim());
-                    map.put("email",et_email.getText().toString().trim());
-                    map.put("isVerified","false");
-                    db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).update(map);
+
 
 
                     uploadImage();
@@ -144,6 +139,14 @@ public class ProfileFragment extends Fragment {
                                     // Image uploaded successfully
                                     // Dismiss dialog
                                     //progressDialog.dismiss();
+
+                                    Map<String,Object>map = new HashMap<>();
+                                    map.put("firstName",et_firstname.getText().toString().trim());
+                                    map.put("lastName",et_lastname.getText().toString().trim());
+                                    map.put("email",et_email.getText().toString().trim());
+                                    map.put("isVerified","false");
+                                    db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).update(map);
+
                                     dialog.dismiss();
                                     Toast
                                             .makeText(getContext(),

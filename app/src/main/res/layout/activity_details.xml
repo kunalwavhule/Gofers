@@ -11,12 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="191dp"
         android:background="#1f75fe"
+        android:visibility="gone"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-
 
 
         <TextView
@@ -40,21 +39,33 @@
             app:srcCompat="@drawable/ic_baseline_article_24" />
     </LinearLayout>
 
+    <ProgressBar
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        android:id="@+id/progressbar_details"
+        android:indeterminateTint="#1f75fe" />
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload all document Step wise"
         android:layout_below="@id/linearLayout"
         android:layout_centerHorizontal="true"
-        android:textSize="16dp"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:id="@+id/upload_text"
         android:fontFamily="@font/acme"
-        android:layout_marginTop="10dp"/>
+        android:text="Upload all document Step wise"
+        android:textSize="16dp" />
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/adhar_card"
         android:layout_width="300dp"
         android:layout_height="60dp"
+        android:visibility="gone"
 
         android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
@@ -84,6 +95,7 @@
         android:text="2.   Driving Licence"
         android:textAlignment="textStart"
         android:textAllCaps="false"
+        android:visibility="gone"
         android:textColor="@color/black"
         android:textSize="23dp"
 
@@ -100,6 +112,7 @@
         android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
         android:padding="10dp"
         android:text="3.   Vehicle RC"
+        android:visibility="gone"
         android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textColor="@color/black"
@@ -113,6 +126,7 @@
         android:layout_height="60dp"
         android:layout_below="@+id/rc_card"
         android:layout_centerHorizontal="true"
+        android:visibility="gone"
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_edittetext_"
         android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"

@@ -10,6 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +29,9 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     FirebaseFirestore db;
+    TextView upload_text;
+    LinearLayout linearLayout;
+    ProgressBar progressBar;
     FirebaseAuth mAuth;
     Button adhar_card,driving_card,rc_card,profile_card;
     public static String selectionId = null;
@@ -36,8 +42,16 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar_details);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        upload_text = (TextView) findViewById(R.id.upload_text);
+        linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        adhar_card =  findViewById(R.id.adhar_card);
+        driving_card =  findViewById(R.id.driving_card);
+        rc_card =  findViewById(R.id.rc_card);
+        profile_card =  findViewById(R.id.profile_card);
+
         db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber())
         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -48,6 +62,17 @@ public class DetailsActivity extends AppCompatActivity {
                         global = documentSnapshot.toObject(Global.class);
                         checks();
                     }else {
+
+                        linearLayout.setVisibility(View.VISIBLE);
+                        adhar_card.setVisibility(View.VISIBLE);
+                        driving_card.setVisibility(View.VISIBLE);
+                        rc_card.setVisibility(View.VISIBLE);
+                        profile_card.setVisibility(View.VISIBLE);
+                        upload_text.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+
+
+
                         profile_card.setEnabled(false);
                         profile_card.setBackgroundResource(R.drawable.disable_button);
                         profile_card.setTextColor(getResources().getColor(R.color.grey));
@@ -64,10 +89,7 @@ public class DetailsActivity extends AppCompatActivity {
                 }
             }
         });
-        adhar_card =  findViewById(R.id.adhar_card);
-        driving_card =  findViewById(R.id.driving_card);
-        rc_card =  findViewById(R.id.rc_card);
-        profile_card =  findViewById(R.id.profile_card);
+
 
 
 
@@ -108,7 +130,17 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void checks() {
-        if (global.getIsVerified()==null) {
+
+        if (Objects.equals(global.getIsVerified(), "true")) {
+            startActivity(new Intent(DetailsActivity.this, MainActivity.class));
+        } else if (Objects.equals(global.getIsVerified(), "false")) {
+            startActivity(new Intent(DetailsActivity.this, UnderVerificationActivity.class));
+        }else if (Objects.equals(global.getIsVerified(), "wrong")){
+            Toast.makeText(DetailsActivity.this, "Re upload all Information", Toast.LENGTH_SHORT).show();
+            db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).delete();
+            startActivity(new Intent(DetailsActivity.this,DetailsActivity.class));
+        } else {
+            linearLayout.setVisibility(View.VISIBLE);
             if (global.getAdhar() != null) {
                 adhar_card.setEnabled(false);
                 if (global.getLicence() != null) {
@@ -180,10 +212,13 @@ public class DetailsActivity extends AppCompatActivity {
                 driving_card.setTextColor(getResources().getColor(R.color.grey));
 
             }
-        }else if (Objects.equals(global.getIsVerified(), "false")){
-            startActivity(new Intent(DetailsActivity.this,UnderVerificationActivity.class));
-        }else {
-            startActivity(new Intent(DetailsActivity.this,MainActivity.class));
+
+            adhar_card.setVisibility(View.VISIBLE);
+            driving_card.setVisibility(View.VISIBLE);
+            rc_card.setVisibility(View.VISIBLE);
+            profile_card.setVisibility(View.VISIBLE);
+            upload_text.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
         }
     }
 }

@@ -77,9 +77,7 @@ public class AdharFragment extends Fragment {
                     Toast.makeText(getContext(), "Enter Valid Adhar Card No.", Toast.LENGTH_SHORT).show();
                 }else {
                     dialog = ProgressDialog.show(getContext(), "Uploading", "Please Wait", true);
-                    Map<String,Object> map = new HashMap<>();
-                    map.put("adhar",et_adhar.getText().toString().trim());
-                    db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).set(map);
+
                     uploadImage();
                 }
             }
@@ -132,6 +130,11 @@ public class AdharFragment extends Fragment {
                                     // Image uploaded successfully
                                     // Dismiss dialog
                                     //progressDialog.dismiss();
+
+
+                                    Map<String,Object> map = new HashMap<>();
+                                    map.put("adhar",et_adhar.getText().toString().trim());
+                                    db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).set(map);
 
                                     dialog.dismiss();
                                     Toast

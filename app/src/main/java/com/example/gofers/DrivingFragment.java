@@ -78,9 +78,7 @@ public class DrivingFragment extends Fragment {
                     Toast.makeText(getContext(), "Enter Valid Licence No.", Toast.LENGTH_SHORT).show();
                 }else {
                     dialog = ProgressDialog.show(getContext(), "Uploading", "Please Wait", true);
-                    Map<String,Object>map = new HashMap<>();
-                    map.put("licence",et_driving.getText().toString().trim());
-                    db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).update(map);
+
                     uploadImage();
                 }
             }
@@ -133,6 +131,10 @@ public class DrivingFragment extends Fragment {
                                     // Image uploaded successfully
                                     // Dismiss dialog
                                     //progressDialog.dismiss();
+
+                                    Map<String,Object>map = new HashMap<>();
+                                    map.put("licence",et_driving.getText().toString().trim());
+                                    db.collection("Driver").document(mAuth.getCurrentUser().getPhoneNumber()).update(map);
 
                                     dialog.dismiss();
                                     Toast
