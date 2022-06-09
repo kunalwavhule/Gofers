@@ -219,6 +219,8 @@ public class DetailsActivity extends AppCompatActivity {
             profile_card.setVisibility(View.VISIBLE);
             upload_text.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
+
+            // all done
         }
     }
 }
