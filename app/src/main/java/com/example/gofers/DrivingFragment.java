@@ -2,13 +2,20 @@ package com.example.gofers;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -38,10 +45,19 @@ public class DrivingFragment extends Fragment {
 
     ImageView licenceImage;
 
-    private final int PICK_IMAGE_REQUEST = 25;
-    private Uri filePath;
+
+    private Uri image_uri;
     Button SubmitBtn;
     EditText et_driving;
+
+
+    private static final int CAMERA_REQUEST_CODE = 200;
+    private static final int STORAGE_REQUEST_CODE = 400;
+    private static final int IMAGE_PICK_GALLERY_CODE = 1000;
+    private static final int IMAGE_PICK_CAMERA_CODE = 2001;
+
+    String cameraPermission[];
+    String storagePermission[];
 
     FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -57,6 +73,13 @@ public class DrivingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_driving, container, false);
 
+        cameraPermission = new String[] {Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        //storage permission
+        storagePermission = new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+
+
         licenceImage = view.findViewById(R.id.licenceImageUpload);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -67,7 +90,8 @@ public class DrivingFragment extends Fragment {
         licenceImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectImage();
+                showImageImportDialog();
+                //selectImage();
             }
         });
 
@@ -86,23 +110,11 @@ public class DrivingFragment extends Fragment {
         return view;
     }
 
-    private void selectImage() {
 
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(
-                Intent.createChooser(
-                        intent,
-                        "Select Image from here..."),
-                PICK_IMAGE_REQUEST);
-
-
-    }
 
     private void uploadImage() {
 
-        if (filePath != null) {
+        if (image_uri != null) {
 
             // Code for showing progressDialog while uploading
             //ProgressDialog progressDialog
@@ -119,7 +131,7 @@ public class DrivingFragment extends Fragment {
 
             // adding listeners on upload
             // or failure of image
-            ref.putFile(filePath)
+            ref.putFile(image_uri)
                     .addOnSuccessListener(
                             new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
@@ -190,6 +202,9 @@ public class DrivingFragment extends Fragment {
 
 
 
+
+
+
     @Override
     public void onActivityResult(int requestCode,
                                  int resultCode,
@@ -199,10 +214,69 @@ public class DrivingFragment extends Fragment {
                 resultCode,
                 data);
 
+        Toast.makeText(getContext(), "on activity", Toast.LENGTH_SHORT).show();
+
+        if (resultCode== RESULT_OK){
+            if (requestCode == IMAGE_PICK_GALLERY_CODE) {
+
+                //got image from gallery now crop it
+                image_uri = data.getData(); //get image uri
+                //set image to image view
+
+                try {
+
+                    // Setting image on image view using Bitmap
+                    Bitmap bitmap = MediaStore
+                            .Images
+                            .Media
+                            .getBitmap(
+                                    getActivity().getContentResolver(),
+                                    image_uri);
+
+                    licenceImage.setImageBitmap(bitmap);
+
+
+                } catch (IOException e) {
+                    // Log the exception
+                    e.printStackTrace();
+                }
+            }
+
+            if (requestCode == IMAGE_PICK_CAMERA_CODE) {
+                //got image from camera now crop it
+                //image_uri = data.getData(); //get image uri
+                //set image to image view
+
+                try {
+
+                    // Setting image on image view using Bitmap
+                    Bitmap bitmap = MediaStore
+                            .Images
+                            .Media
+                            .getBitmap(
+                                    getActivity().getContentResolver(),
+                                    image_uri);
+
+                    licenceImage.setImageBitmap(bitmap);
+
+
+                } catch (IOException e) {
+                    // Log the exception
+                    e.printStackTrace();
+                }
+                //adharImage.setImageURI(image_uri);
+            }
+        }
+
         // checking request code and result code
         // if request code is PICK_IMAGE_REQUEST and
         // resultCode is RESULT_OK
         // then set image in the image view
+
+
+
+
+        /*
         if (requestCode == PICK_IMAGE_REQUEST
                 && resultCode == RESULT_OK
                 && data != null
@@ -220,13 +294,126 @@ public class DrivingFragment extends Fragment {
                                 getActivity().getContentResolver(),
                                 filePath);
 
-                licenceImage.setImageBitmap(bitmap);
+                adharImage.setImageBitmap(bitmap);
 
 
             } catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();
             }
+
+
+        }
+        */
+    }
+
+    private void showImageImportDialog() {
+        String[] items = {"Camera", "Gallery"};
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+
+        dialog.setTitle("Select Image");
+        dialog.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0) {
+                    if (!checkCameraPermission()) {
+                        //camera permission not allowed, request it
+                        requestCameraPermission();
+                    } else {
+                        //permission allowed, take picture
+                        pickCamera();
+                    }
+                }
+
+                if (which == 1) {
+                    if (!checkStoragePermission()) {
+                        //storage permission not allowed, request it
+                        requestStoragePermission();
+                    } else {
+                        //permission allowed, take picture
+                        pickGallery();
+                    }
+                }
+            }
+        });
+        dialog.create().show();
+    }
+
+    private void pickGallery() {
+        //intent to pick image from gallery
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        //set intent type to image
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_GALLERY_CODE);
+    }
+
+    private void pickCamera() {
+        //intent to take image from camera, it will also be save to storage to get high quality image
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "NewPick"); //title of the picture
+        values.put(MediaStore.Images.Media.DESCRIPTION, "Image To Text"); //title of the picture
+        image_uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+        startActivityForResult(cameraIntent, IMAGE_PICK_CAMERA_CODE);
+    }
+
+    private void requestStoragePermission() {
+        ActivityCompat.requestPermissions(getActivity(), storagePermission, STORAGE_REQUEST_CODE);
+    }
+
+    private boolean checkStoragePermission() {
+        boolean result = ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
+        return result;
+    }
+
+    private void requestCameraPermission() {
+        ActivityCompat.requestPermissions(getActivity(), cameraPermission, CAMERA_REQUEST_CODE);
+    }
+
+    private boolean checkCameraPermission() {
+        boolean result = ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
+
+        boolean result1 = ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
+        return result && result1;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case CAMERA_REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    boolean cameraAccepted = grantResults[0] ==
+                            PackageManager.PERMISSION_GRANTED;
+                    boolean writeStorageAccepted = grantResults[0] ==
+                            PackageManager.PERMISSION_GRANTED;
+
+                    if (cameraAccepted && writeStorageAccepted) {
+                        pickCamera();
+                    } else {
+                        Toast.makeText(getContext(), "Permission denied", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+
+            case STORAGE_REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    boolean writeStorageAccepted = grantResults[0] ==
+                            PackageManager.PERMISSION_GRANTED;
+
+                    if (writeStorageAccepted) {
+                        pickGallery();
+                    } else {
+                        Toast.makeText(getContext(), "Permission denied", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
         }
     }
 }
+
+

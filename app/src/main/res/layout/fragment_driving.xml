@@ -122,6 +122,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_edittetext_"
         android:fontFamily="@font/acme"
+
         android:hint="Enter Driving Licence No. Here"
         android:padding="10dp"
         android:textColorHint="#3C3C3C"

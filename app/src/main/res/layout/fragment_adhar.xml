@@ -119,6 +119,7 @@
         android:background="@drawable/custom_edittetext_"
         android:fontFamily="@font/acme"
         android:hint="Enter Adhar No. Here"
+
         android:padding="10dp"
         android:textColorHint="#3C3C3C"
         app:layout_constraintBottom_toBottomOf="parent"
