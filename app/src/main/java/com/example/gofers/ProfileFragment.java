@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -156,6 +157,8 @@ public class ProfileFragment extends Fragment {
                                         UploadTask.TaskSnapshot taskSnapshot)
                                 {
 
+                                    //Task<Uri> downloadUri = taskSnapshot.getStorage().getDownloadUrl();
+                                    //String generatedFilePath = downloadUri.getResult().toString();
                                     // Image uploaded successfully
                                     // Dismiss dialog
                                     //progressDialog.dismiss();
