@@ -8,8 +8,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_below="@id/textviewu"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
@@ -32,61 +32,70 @@
 
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/acme"
+        android:fontFamily="@font/glacial_bold"
         android:text="Fill Your All Details Corectly Below :"
-        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textviewp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textviewp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/baloo_bhai"
+
+        android:fontFamily="@font/glacial_bold"
         android:text="Profile Info"
         android:textColor="@color/black"
-        android:textSize="40dp" />
+        android:textSize="38dp" />
 
     <EditText
         android:id="@+id/et_firstname"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/profilePic"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/edittext_background"
-        android:fontFamily="@font/acme"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/new_blue_edittext"
+
         android:hint="First Name"
         android:padding="10dp"
-        android:textColorHint="#3C3C3C" />
+        android:textColor="@color/white"
+        android:fontFamily="@font/glacial_regular"
+        android:gravity="center"
+        android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/et_lastname"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/et_firstname"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/edittext_background"
-        android:fontFamily="@font/acme"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/new_blue_edittext"
+
         android:hint="Last name"
         android:padding="10dp"
-        android:textColorHint="#3C3C3C" />
+        android:textColor="@color/white"
+        android:fontFamily="@font/glacial_regular"
+        android:gravity="center"
+        android:textColorHint="@color/white" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Profile Icon to select Image"
-        app:layout_constraintEnd_toEndOf="@+id/profilePic"
         android:layout_below="@id/profilePic"
         android:layout_centerHorizontal="true"
-
-        android:fontFamily="@font/acme"
-        android:textStyle="italic"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/glacial_regular"
+        android:text="Select Profile Icon to select Image"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+
+        app:layout_constraintEnd_toEndOf="@+id/profilePic"
         app:layout_constraintStart_toStartOf="@+id/profilePic"
         app:layout_constraintTop_toBottomOf="@+id/profilePic" />
 
@@ -95,14 +104,17 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/et_lastname"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/edittext_background"
-        android:fontFamily="@font/acme"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/new_blue_edittext"
+
         android:hint="Email"
         android:padding="10dp"
-        android:textColorHint="#3C3C3C" />
+        android:textColor="@color/white"
+        android:fontFamily="@font/glacial_regular"
+        android:gravity="center"
+        android:textColorHint="@color/white" />
 
     <TextView
         android:id="@+id/textviewu"
@@ -111,18 +123,19 @@
         android:layout_below="@id/textviewf"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:fontFamily="@font/amaranth_bold"
+        android:textColor="@color/black"
+        android:fontFamily="@font/glacial_bold"
         android:text="Upload Your Clear Image:"
-        android:textSize="20dp" />
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/profileSubmitBtn"
-        android:layout_width="300dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_email"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:backgroundTint="@color/purple_500"
+        android:backgroundTint="#004aad"
         android:fontFamily="@font/acme"
         android:text="Submit"
         android:textSize="26dp" />

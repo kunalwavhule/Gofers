@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
         // to toggle the button
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        mAuth = FirebaseAuth.getInstance();
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference()
-                .child("Driver").child(mAuth.getCurrentUser().getPhoneNumber()).child("profile");
+       // mAuth = FirebaseAuth.getInstance();
+        //StorageReference storageReference = FirebaseStorage.getInstance().getReference()
+        //        .child("Driver").child(mAuth.getCurrentUser().getPhoneNumber()).child("profile");
 
 
 

@@ -18,18 +18,39 @@
             android:id="@+id/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/purple_200"/>
+            android:background="#004aad"/>
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="128dp"
+            android:layout_marginTop="80dp"
             android:gravity="center"
             android:text="Welcome to Gofers cab."
             android:textStyle="bold"
+            android:fontFamily="@font/glacial_bold"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="25sp" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_watch_later_24"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="More Feature Coming Soon...."
+            android:fontFamily="@font/glacial_regular"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+
+
 
     </LinearLayout>
 
