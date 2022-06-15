@@ -30,7 +30,7 @@
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_show.xml" value="0.536" />
-        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_splash_screen.xml" value="0.264" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_splash_screen.xml" value="0.4" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_under_verification.xml" value="0.264" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/activity_verification.xml" value="0.176" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/fragment_adhar.xml" value="0.2" />
@@ -38,6 +38,7 @@
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/fragment_r_c.xml" value="0.4" />
         <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/layout/nav_header.xml" value="0.2234375" />
+        <entry key="..\:/Users/XlauncherX/AndroidStudioProjects/Gofers/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.187" />
       </map>
     </option>
   </component>
