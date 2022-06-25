@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public Toolbar toolbar;
     FirebaseAuth mAuth;
 
-    ImageView imageViewnav;
+    ImageView imageViewNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.Toolbar);
+        imageViewNav = (ImageView) findViewById(R.id.imageViewNav);
+        imageViewNav.setBackgroundResource(R.drawable.groffer);
 
         drawerLayout = findViewById(R.id.my_drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.nav_open, R.string.nav_close);
